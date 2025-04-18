@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package helloworld.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "helloworld/api/helloworld/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.helloworld.v1";
+option java_outer_classname = "HelloworldProtoV1";
+
+// UserService 定义了用户服务的接口
+service UserService {
+  // 创建用户
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/users"
+      body: "*"
+    };
+  }
+
+  // 获取用户
+  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/{id}"
+    };
+  }
+
+  // 更新用户
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      put: "/v1/users/{id}"
+      body: "*"
+    };
+  }
+
+  // 删除用户
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    option (google.api.http) = {
+      delete: "/v1/users/{id}"
+    };
+  }
+
+  // 列出所有用户
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+    option (google.api.http) = {
+      get: "/v1/users"
+    };
+  }
+}
+
+// CreateUserRequest 是创建用户的请求消息
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  int32 age = 3;
+}
+
+// CreateUserResponse 是创建用户的响应消息
+message CreateUserResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+// GetUserByIDRequest 是获取用户的请求消息
+message GetUserByIDRequest {
+  int64 id = 1;
+}
+
+// GetUserByIDResponse 是获取用户的响应消息
+message GetUserByIDResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+// UpdateUserRequest 是更新用户的请求消息
+message UpdateUserRequest {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+}
+
+// UpdateUserResponse 是更新用户的响应消息
+message UpdateUserResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+// DeleteUserRequest 是删除用户的请求消息
+message DeleteUserRequest {
+  int64 id = 1;
+}
+
+// DeleteUserResponse 是删除用户的响应消息
+message DeleteUserResponse {}
+
+// ListUsersRequest 是列出所有用户的请求消息
+message ListUsersRequest {}
+
+// ListUsersResponse 是列出所有用户的响应消息
+message ListUsersResponse {
+  repeated User users = 1;
+}
+
+// User 是用户的消息类型
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
